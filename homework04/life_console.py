@@ -39,8 +39,8 @@ class Console(UI):
                 screen.addch(row + 1, col + 1, char)
 
     def run(self) -> None:
-        curses.resize_term(self.max_rows + 1, self.max_cols + 1)
         screen = curses.initscr()
+        curses.resize_term(self.max_rows + 1, self.max_cols + 1)
         # Get actual terminal size
         max_y, max_x = screen.getmaxyx()
 

@@ -96,7 +96,7 @@ class GameOfLife:
                 else:
                     color = pygame.Color("white")
                 pygame.draw.rect(
-                    self.screen, color, (x * self.cell_size, y * self.cell_size), self.cell_size, self.cell_size
+                    self.screen, color, (x * self.cell_size, y * self.cell_size, self.cell_size, self.cell_size)
                 )
 
     def get_neighbours(self, cell: Cell) -> Cells:
