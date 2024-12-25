@@ -100,7 +100,23 @@ class GameOfLife:
                 )
 
     def get_neighbours(self, cell: Cell) -> Cells:
-        """Return list of neighbor cell values"""
+        """
+        Вернуть список соседних клеток для клетки `cell`.
+
+        Соседними считаются клетки по горизонтали, вертикали и диагоналям,
+        то есть, во всех направлениях.
+
+        Parameters
+        ----------
+        cell : Cell
+            Клетка, для которой необходимо получить список соседей. Клетка
+            представлена кортежем, содержащим ее координаты на игровом поле.
+
+        Returns
+        ----------
+        out : Cells
+            Список соседних клеток, в котором каждая позиция – 0 или 1.
+        """
         row, col = cell
         values = []
         for dx in [-1, 0, 1]:
@@ -111,6 +127,7 @@ class GameOfLife:
                 if 0 <= new_row < self.cell_height and 0 <= new_col < self.cell_width:
                     values.append(self.grid[new_row][new_col])
         return values
+
 
     def get_next_generation(self) -> Grid:
         """
