@@ -101,21 +101,25 @@ def solve(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.List[tp.List[str]]]:
 
 def check_solution(solution: tp.List[tp.List[str]]) -> bool:
     """Если решение solution верно, то вернуть True, в противном случае False"""
+    for row in solution:
+        if "." in row:
+            return False
+
+    valid_numbers = set(str(num) for num in range(1, 10))
     for index in range(9):
-        current_col = get_col(solution, (0, index))
-        current_row = get_row(solution, (index, 0))
+        row_values = set(get_row(solution, (index, 0)))
+        if row_values != valid_numbers:
+            return False
 
-        block_start_row = (index // 3) * 3
-        block_start_col = (index % 3) * 3
-        current_block = get_block(solution, (block_start_row, block_start_col))
+    for index in range(9):
+        col_values = set(get_col(solution, (0, index)))
+        if col_values != valid_numbers:
+            return False
 
-        for number in range(1, 10):
-            str_number = str(number)
-            if str_number not in current_col:
-                return False
-            if str_number not in current_row:
-                return False
-            if str_number not in current_block:
+    for block_row in range(0, 9, 3):
+        for block_col in range(0, 9, 3):
+            block_values = set(get_block(solution, (block_row, block_col)))
+            if block_values != valid_numbers:
                 return False
 
     return True
